@@ -18,9 +18,12 @@ targets:
     type: application
     platform: iOS
     sources:
-      - Sources
-      - Shared
-      - Resources
+      - path: Sources
+        type: group
+      - path: Shared
+        type: group
+      - path: Resources
+        type: group
     settings:
       base:
         INFOPLIST_FILE: Resources/Info.plist
@@ -36,8 +39,10 @@ targets:
     type: app-extension
     platform: iOS
     sources:
-      - ShareExtension
-      - Shared
+      - path: ShareExtension
+        type: group
+      - path: Shared
+        type: group
     settings:
       base:
         INFOPLIST_FILE: ShareExtension/Info.plist

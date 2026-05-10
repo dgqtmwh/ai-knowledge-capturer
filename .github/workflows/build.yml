@@ -21,6 +21,9 @@ jobs:
       - name: Set Xcode version
         run: sudo xcode-select -s /Applications/Xcode_16.app/Contents/Developer
 
+      - name: List available simulators
+        run: xcrun simctl list runtimes
+
       - name: Generate Xcode Project
         run: xcodegen generate
 
@@ -30,13 +33,6 @@ jobs:
             -project AIKnowledgeCapturer.xcodeproj \
             -scheme AIKnowledgeCapturer \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=18.0' \
+            -destination 'generic/platform=iOS Simulator' \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty && exit ${PIPESTATUS[0]}
-
-      - name: Upload build artifacts (optional)
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: build-logs
-          path: ~/Library/Logs/DiagnosticReports/

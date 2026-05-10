@@ -1,44 +1,13 @@
-name: "AIKnowledgeCapturer"
+name: Test
 options:
-  bundleIdPrefix: "com.yourname"
+  bundleIdPrefix: com.test
   deploymentTarget:
     iOS: "18.0"
-  xcodeVersion: "16.0"
-
-settings:
-  base:
-    SWIFT_VERSION: "6.0"
-    DEVELOPMENT_TEAM: ""
-    MARKETING_VERSION: "1.0.0"
-    CURRENT_PROJECT_VERSION: "1"
-
 targets:
-  AIKnowledgeCapturer:
+  TestApp:
     type: application
     platform: iOS
     sources:
-      - Sources
-      - Resources
-    settings:
-      base:
-        INFOPLIST_FILE: Resources/Info.plist
-        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer
-        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
-    entitlements:
-      com.apple.security.application-groups:
-        - group.com.yourname.aiknowledgecapturer
-    dependencies:
-      - target: SaveToKnowledgeCapturer
-
-  SaveToKnowledgeCapturer:
-    type: app-extension
-    platform: iOS
-    sources:
-      - ShareExtension
-    settings:
-      base:
-        INFOPLIST_FILE: ShareExtension/Info.plist
-        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer.share
-    entitlements:
-      com.apple.security.application-groups:
-        - group.com.yourname.aiknowledgecapturer
+      - Sources/App/AIKnowledgeCapturerApp.swift
+      - Sources/Models/SavedItem.swift
+      - Sources/Models/SourceType.swift

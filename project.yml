@@ -49,7 +49,6 @@ targets:
       - path: ShareExtension
         type: group
       - path: Sources/Utilities/AppGroup.swift
-        type: group
     settings:
       base:
         INFOPLIST_FILE: ShareExtension/Info.plist

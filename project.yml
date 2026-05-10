@@ -4,7 +4,6 @@ options:
   deploymentTarget:
     iOS: "18.0"
   xcodeVersion: "16.0"
-  generateEmptyDirectories: true
 
 settings:
   base:
@@ -19,8 +18,6 @@ targets:
     platform: iOS
     sources:
       - path: Sources
-        type: group
-      - path: Shared
         type: group
       - path: Resources
         type: group
@@ -41,8 +38,7 @@ targets:
     sources:
       - path: ShareExtension
         type: group
-      - path: Shared
-        type: group
+      - Sources/Shared/AppGroup.swift
     settings:
       base:
         INFOPLIST_FILE: ShareExtension/Info.plist

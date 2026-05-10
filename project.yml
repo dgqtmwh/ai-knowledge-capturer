@@ -1,0 +1,59 @@
+name: "AIKnowledgeCapturer"
+options:
+  bundleIdPrefix: "com.yourname"
+  deploymentTarget:
+    iOS: "18.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    DEVELOPMENT_TEAM: "" # ← 改成你的 Apple Developer Team ID
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+
+targets:
+  AIKnowledgeCapturer:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sources
+        type: group
+      - path: Resources
+        type: group
+    settings:
+      base:
+        INFOPLIST_FILE: Resources/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer
+        APP_GROUP_IDENTIFIER: group.com.yourname.aiknowledgecapturer
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    entitlements:
+      com.apple.security.application-groups:
+        - group.com.yourname.aiknowledgecapturer
+    dependencies:
+      - target: SaveToKnowledgeCapturer
+    preBuildScripts:
+      - name: "SwiftLint"
+        script: |
+          if which swiftlint >/dev/null; then
+            swiftlint
+          fi
+        basedOnDependencyAnalysis: false
+
+  SaveToKnowledgeCapturer:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ShareExtension
+        type: group
+      - path: Sources/Utilities/AppGroup.swift
+        type: group
+    settings:
+      base:
+        INFOPLIST_FILE: ShareExtension/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer.share
+    entitlements:
+      com.apple.security.application-groups:
+        - group.com.yourname.aiknowledgecapturer

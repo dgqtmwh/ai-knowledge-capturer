@@ -1,13 +1,17 @@
-name: Test
+name: "AIKnowledgeCapturer"
 options:
-  bundleIdPrefix: com.test
+  bundleIdPrefix: "com.yourname"
   deploymentTarget:
     iOS: "18.0"
 targets:
-  TestApp:
+  AIKnowledgeCapturer:
     type: application
     platform: iOS
     sources:
-      - Sources/App/AIKnowledgeCapturerApp.swift
-      - Sources/Models/SavedItem.swift
-      - Sources/Models/SourceType.swift
+      - Sources
+      - Resources
+    settings:
+      base:
+        INFOPLIST_FILE: Resources/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

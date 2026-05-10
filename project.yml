@@ -15,7 +15,6 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer
     dependencies:
       - target: SaveToKnowledgeCapturer
-      - target: AIKnowledgeCapturerUnitTests
 
   SaveToKnowledgeCapturer:
     type: app-extension

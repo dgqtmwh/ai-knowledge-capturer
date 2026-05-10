@@ -15,6 +15,7 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer
     dependencies:
       - target: SaveToKnowledgeCapturer
+      - target: AIKnowledgeCapturerUnitTests
 
   SaveToKnowledgeCapturer:
     type: app-extension
@@ -25,3 +26,27 @@ targets:
       base:
         INFOPLIST_FILE: ShareExtension/Info.plist
         PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer.share
+
+  AIKnowledgeCapturerUnitTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests/Unit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer.unit-tests
+        TEST_TARGET_NAME: AIKnowledgeCapturer
+    dependencies:
+      - target: AIKnowledgeCapturer
+
+  AIKnowledgeCapturerUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - Tests/UI
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.yourname.aiknowledgecapturer.ui-tests
+        TEST_TARGET_NAME: AIKnowledgeCapturer
+    dependencies:
+      - target: AIKnowledgeCapturer

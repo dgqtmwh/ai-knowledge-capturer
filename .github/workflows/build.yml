@@ -1,4 +1,4 @@
-name: Build & Validate
+name: Build & Test
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build iOS App
+    name: Build & Test
     runs-on: macos-15
     timeout-minutes: 30
 
@@ -30,5 +30,25 @@ jobs:
             -project AIKnowledgeCapturer.xcodeproj \
             -scheme AIKnowledgeCapturer \
             -sdk iphonesimulator \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: Unit Tests
+        run: |
+          xcodebuild test \
+            -project AIKnowledgeCapturer.xcodeproj \
+            -scheme AIKnowledgeCapturerUnitTests \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty && exit ${PIPESTATUS[0]}
+
+      - name: UI Tests
+        run: |
+          xcodebuild test \
+            -project AIKnowledgeCapturer.xcodeproj \
+            -scheme AIKnowledgeCapturerUITests \
+            -sdk iphonesimulator \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty && exit ${PIPESTATUS[0]}

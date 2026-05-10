@@ -2,6 +2,7 @@ import XCTest
 @testable import AIKnowledgeCapturer
 
 /// Service 层测试 — 数据存储服务
+@MainActor
 final class StorageServiceTests: XCTestCase {
 
     private var storage: StorageService!

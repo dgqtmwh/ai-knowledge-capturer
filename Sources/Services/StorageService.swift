@@ -14,9 +14,10 @@ final class StorageService {
     func setup() {
         let schema = Schema([SavedItem.self])
         let config = ModelConfiguration(
-            schema: schema,
+            schema,
             url: AppGroup.storePath,
-            groupContainer: .identifier(AppGroup.identifier)
+            allowsSave: true,
+            cloudKitDatabase: .none
         )
         container = try? ModelContainer(for: schema, configurations: config)
         context = container?.mainContext

@@ -34,7 +34,7 @@ struct AIKnowledgeCapturerApp: App {
         StorageService.shared.setup()
         
         // 检查并导入 Share Extension 的内容
-        StorageService.shared.importSharedContent()
+        _ = StorageService.shared.importSharedContent()
         
         // 标记就绪
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

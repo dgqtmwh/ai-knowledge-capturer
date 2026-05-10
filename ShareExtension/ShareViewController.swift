@@ -39,15 +39,17 @@ class ShareViewController: UIViewController {
             return
         }
         
+        // 在闭包外提取文本提供者（避免 Sendable 捕获）
+        let textProvider = attachments.first(where: { $0.hasItemConformingToTypeIdentifier(UTType.text.identifier) })
+        
         provider.loadItem(forTypeIdentifier: UTType.url.identifier, options: nil) { [weak self] (item, error) in
             guard let url = item as? URL else {
                 self?.complete()
                 return
             }
             
-            // 找标题文本
-            if let textProvider = attachments.first(where: { $0.hasItemConformingToTypeIdentifier(UTType.text.identifier) }) {
-                textProvider.loadItem(forTypeIdentifier: UTType.text.identifier, options: nil) { [weak self] (textItem, _) in
+            if let tProvider = textProvider {
+                tProvider.loadItem(forTypeIdentifier: UTType.text.identifier, options: nil) { [weak self] (textItem, _) in
                     let title = textItem as? String ?? url.absoluteString
                     let text = textItem as? String
                     let shared = SharedContent(
